@@ -28,3 +28,76 @@
   content: "";
   padding: 0;
 }
+
+
+@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+ .kbw-item {
+    width: 250px;
+}
+.kbw-item-ctx {
+    width: 10px;
+    color: white;
+    float: right;
+}
+.kbw-item i {
+    float: right;
+}
+.kbw-user {
+    float: right;
+    color: rgba(0, 0, 0, 0.5);
+    padding-left: 10px;
+}
+
+.kbw-item-caption a
+{
+    color: white; 
+}
+
+
+.kbw-item-caption {
+    padding: 4px 8px 4px 8px;
+    !important;
+}
+
+body{
+  background: url(../img/grey_wash_wall.png)
+}
+
+.kbw-lane-header{
+
+   border-top: 4px solid;
+    text-align: center;
+    min-width: 30px;
+    display: block;
+    background-color: rgba(218, 211, 218, 0.9);
+    border-bottom: 2px solid rgba(200, 200, 200, 1);
+}
+
+.kbw-lane {
+    display: inline-block;
+    list-style-type: none;
+    height: 100%;
+    min-height: 500px;
+    min-width: 200px;
+    padding: 0px;
+    border: 1px solid rgba(200, 200, 200, 1);;
+    margin: 0x;
+    width: 33%;
+    background: rgba(255,255,255,0.4);
+    overflow: hidden;
+}
+
+
+div[data-state='Proposed']{
+  border-top-color:#5C8AE6;
+}
+
+
+div[data-state='Doing']{
+  border-top-color:#FFCC00;
+}
+
+
+div[data-state='Completed']{
+  border-top-color:#009900;
+}

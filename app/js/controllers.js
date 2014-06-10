@@ -3,9 +3,31 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('MyCtrl1', ['$scope', function($scope) {
+  .controller('MasterCtrl', ['$scope', '$location', function($scope, $location) {
+    $scope.getClass = function(path) {
+    if ($location.path().substr(0, path.length) == path) {
+          return "active"
+        } else {
+          return ""
+        }
+    }
 
   }])
-  .controller('MyCtrl2', ['$scope', function($scope) {
+  .controller('ProjectCtrl', ['$scope', function($scope) {
+
+  	$scope.Items = [
+  		{
+  			Caption: 'Item #1',
+  			Owner: 'nawrockim@op.pl',
+  			Content: 'Learn angularjs and write an application. i.e Kanban board',
+  			State: 'Proposed'
+  		},
+  		{
+  			Caption: 'Item #2',
+  			Owner: 'nawrockim@op.pl',
+  			Content: 'asdbsadadsadas',
+  			State: 'Completed'
+  		}
+  	];
 
   }]);

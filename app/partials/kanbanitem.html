@@ -1,0 +1,20 @@
+<div class='kbw-item panel panel-primary'>
+    <div class="panel-heading kbw-item-caption"><a>{{item.Caption}}</a>
+       
+       <span class="dropdown">
+          <a class="fa fa-cog kbw-item-ctx" data-toggle="dropdown"></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li role="presentation"><a role="menuitem" tabindex="-1">Action</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+            <li role="presentation" class="divider"></li>
+            <li role="presentation"><a role="menuitem" class="btn btn-danger" tabindex="-1" href="#">Delete</a></li>
+          </ul>
+        </span>
+        
+    </div>
+  <div class="panel-body">
+      <i class="kbw-user fa fa-user fa-3x" title="{{item.Owner}}"></i>
+       {{item.Content}}
+  </div>
+</div>
