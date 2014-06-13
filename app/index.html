@@ -24,33 +24,20 @@
 <link rel="stylesheet" href="css/app.css"/>
 </head>
 <body>
-   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="MasterCtrl">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a style="font-family: 'Lobster', cursive"  class="navbar-brand" href="#">MyKanbanWall</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li ng-class="getClass('/intro')"><a href="#">Home</a></li>
-            <li ng-class="getClass('/project')"><a href="#/project">Project</a></li>
-            <li ng-class="getClass('/allProjects')"><a href="#/allProjects">Projects</a></li>
-          </ul>
-          <form class="navbar-form navbar-right" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="email">
-            <input type="password" class="form-control" placeholder="password">
-          </div>
-          <button type="submit" class="btn btn-success">Login</button>
-        </form>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+  <style type="text/css">
+
+
+   input.ng-invalid.ng-dirty {
+    border-color: RGBA(255,0,0,0.7);
+    background-color: #FFCCCC;
+
+  }
+
+   </style>
+
+   <ng-include src="'partials\\navbar.html'" ></ng-include>
+
+
 
 
   <!--[if lt IE 7]>

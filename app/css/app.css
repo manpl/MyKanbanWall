@@ -101,3 +101,9 @@ div[data-state='Doing']{
 div[data-state='Completed']{
   border-top-color:#009900;
 }
+
+ input.ng-invalid.ng-dirty {
+    border-color: RGBA(255,0,0,0.7);
+    background-color: #FFCCCC;
+
+  }

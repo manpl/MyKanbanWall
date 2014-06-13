@@ -2,8 +2,28 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', [])
-  .controller('MasterCtrl', ['$scope', '$location', function($scope, $location) {
+var mod = angular.module('myApp.controllers', []);
+
+mod.controller('LoginCtrl', ['$scope', '$location', function($scope, $location) {
+
+    $scope.login = function()
+    { 
+        $scope.isAuthenticated = true; 
+        $scope.user.username =''; 
+        $scope.user.password = '';
+        $scope.loginform.$setPristine();
+    };
+
+    $scope.logout = function(){ $scope.isAuthenticated = false;  };
+    $scope.user = {username:'', password: ''};
+
+    $scope.isAuthenticated = false;
+
+}]);
+
+mod.controller('MasterCtrl', ['$scope', '$location', function($scope, $location) {
+    
+    
     $scope.getClass = function(path) {
     if ($location.path().substr(0, path.length) == path) {
           return "active"
