@@ -1,4 +1,11 @@
-<H3>Items</H3>
+<H3>Projects</H3>
 
 
-
+<table ng-table="projectsTableParams" class="table">
+	<tr ng-repeat="project in $projects">
+		<td data-title="'Project Name'" sortable="'name'"></td>
+		<td data-title="'Created by'" sortable="'createdBy'"></td>
+		<td data-title="'Created on'" sortable="'createOn'"></td>
+		<td data-title="'#users'" sortable="'usersNo'"></td>
+	</tr>
+</table>
