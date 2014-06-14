@@ -51,7 +51,10 @@ mod.controller('MasterCtrl', ['$scope', '$location', function($scope, $location)
   	];
 
   }])
-  .controller('AllProjectsCtrl', ['$scope','ngTableParams', function($scope, ngTableParams) {
+  .controller('AllProjectsCtrl', ['$scope','ngTableParams', '$http', function($scope, ngTableParams, $http) {
+
+
+   
 
     $scope.projectsTableParams = new ngTableParams({
         page: 1,            // show first page
@@ -60,14 +63,19 @@ mod.controller('MasterCtrl', ['$scope', '$location', function($scope, $location)
             name: 'asc'     // initial sorting
         }
     }, {
-        total: data.length, // length of data
+      total: 100,
         getData: function($defer, params) {
-            // use build-in angular filter
-            var orderedData = params.sorting() ?
-                                $filter('orderBy')(data, params.orderBy()) :
-                                data;
+            $http.get('/api/projects/').success(function(data){
+                params.total(data.length);
+                data = data.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                console.log(data);
+                $defer.resolve(data);
+            }).error(
+              function(){
+                alert('error')
+              }
+            );
 
-            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
         }
     });
 

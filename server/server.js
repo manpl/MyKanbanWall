@@ -1,7 +1,10 @@
 var express = require('express'),
 	morgan = require('morgan'),
 	mongoose = require('mongoose'),
-	app = express();
+	app = express(),
+	dbModel = require('./kbwDbModel.js'),
+	KanbanBoardItem = dbModel.KanbanBoardItem,
+	Project = dbModel.Project;
 
 app.use(morgan('dev')); 	
 
@@ -10,19 +13,18 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 
-var kanbanItemSchema = mongoose.Schema({
-	description: String,
-	state: String,
-	createdOn: Date,
-	createdBy: String,
-	projectId: String
-});
-
-var KanbanBoardItem = mongoose.model('KanbanBoardItem', kanbanItemSchema);
 
 db.once('open', function callback () { console.log('Connection open'); });
+app.use('/', express.static(__dirname  + '/../app'));
 
-app.use('/', express.static(__dirname ));
+
+app.route('/api/projects/')
+.get(function(req, res, next){
+	Project.find({}, function(err, data){
+			res.json(data);
+		});
+	});
+
 
 
 app.route('/api/items/')
@@ -32,6 +34,11 @@ app.route('/api/items/')
 		});
 	})
 	.post(function(req, res, next){
+
+		new Project({name:'Kanban board', description: 'Kanban board application just for crack',
+			owner: {name: 'Marcin'}, createdOn: new Date()
+		}).save();;
+
 		new KanbanBoardItem({ description: 'Learn', state: 'Planned', createdOn: new Date(), createdBy: 'userid\\1', projectId: 'projectID\\1' }).save(function(err, item){
 			if (err){
 				console.log('Saved', item);

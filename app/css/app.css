@@ -60,8 +60,8 @@
 }
 
 body{
-  background: url(../img/grey_wash_wall.png)
-}
+  /*background: url(../img/grey_wash_wall.png)
+*/}
 
 .kbw-lane-header{
 
@@ -107,3 +107,7 @@ div[data-state='Completed']{
     background-color: #FFCCCC;
 
   }
+
+.table tbody tr:hover td, .table tbody tr:hover th {
+    background-color:rgba(0,136, 204,0.08);
+}

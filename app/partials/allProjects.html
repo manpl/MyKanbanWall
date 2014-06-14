@@ -1,11 +1,11 @@
 <H3>Projects</H3>
 
 
-<table ng-table="projectsTableParams" class="table">
-	<tr ng-repeat="project in $projects">
-		<td data-title="'Project Name'" sortable="'name'"></td>
-		<td data-title="'Created by'" sortable="'createdBy'"></td>
-		<td data-title="'Created on'" sortable="'createOn'"></td>
-		<td data-title="'#users'" sortable="'usersNo'"></td>
+<table id="projectsTable" ng-table="projectsTableParams" show-filter="true" class="table table-striped">
+	<tr ng-repeat="project in $data">
+		<td data-title="'Project Name'"  filter="{ 'name': 'text' }" sortable="'name'">{{project.name}}</td>
+		<td data-title="'Created by'" sortable="'createdBy'" filter="{ 'createdBy': 'text' }">{{project.owner.name}}</td>
+		<td data-title="'Created on'" sortable="'createOn'"  filter="{ 'createdOn': 'text' }">{{project.createdOn | date:shortDate}}</td>
+
 	</tr>
 </table>
