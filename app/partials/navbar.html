@@ -12,7 +12,6 @@
         <div class="collapse navbar-collapse" ng-controller="LoginCtrl">
           <ul class="nav navbar-nav">
             <li ng-class="getClass('/intro')"><a href="#">Home</a></li>
-            <li ng-class="getClass('/project')"><a href="#/project">Project</a></li>
             <li ng-class="getClass('/allProjects')"><a href="#/allProjects">Projects</a></li>
           </ul>
           <form class="navbar-form navbar-right" role="search" id="loginform" name="loginform" novalidate 
@@ -24,7 +23,7 @@
           <button ng-disabled="loginform.$invalid" class="btn btn-success" ng-click="login()">Login</button>
         </form>
         <ul class="nav navbar-nav navbar-right">
-          <li ng-show="!isAuthenticated" ><a href="#/Register">Register</a></li>
+          <li ng-show="!isAuthenticated" ><a href="#/registerUser">Register</a></li>
           <li ng-show="isAuthenticated"><button class="btn btn-primary" ng-click="logout()">Logout</button></li>
         </ul>
         </div><!--/.nav-collapse -->

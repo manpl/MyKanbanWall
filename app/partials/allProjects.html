@@ -2,10 +2,12 @@
 
 
 <table id="projectsTable" ng-table="projectsTableParams" show-filter="true" class="table table-striped">
-	<tr ng-repeat="project in $data">
+	<tr ng-repeat="project in $data" ng-mouseenter="project.$over = true" ng-mouseleave="project.$over = false">
 		<td data-title="'Project Name'"  filter="{ 'name': 'text' }" sortable="'name'">{{project.name}}</td>
 		<td data-title="'Created by'" sortable="'createdBy'" filter="{ 'createdBy': 'text' }">{{project.owner.name}}</td>
 		<td data-title="'Created on'" sortable="'createOn'"  filter="{ 'createdOn': 'text' }">{{project.createdOn | date:shortDate}}</td>
-
+		<td style="width: 70px">
+			<A HREF="#/project/{{project._id}}" ng-click="showProject(project)" ng-show="project.$over" class="btn btn-primary btn-xs">Show</A>
+		</td>
 	</tr>
 </table>

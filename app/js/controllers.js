@@ -21,8 +21,43 @@ mod.controller('LoginCtrl', ['$scope', '$location', function($scope, $location) 
 
 }]);
 
+
+mod.controller('UserCtrl', ['$scope', '$location', function($scope, $location) {
+    
+    console.log('UserCtrl');
+    
+    $scope.titles = ['Mr', 'Mrs', 'Ms', 'Miss'];
+
+    $scope.user = {
+      title:''
+    };
+
+    $scope.$watch("user.email", function(){
+        
+        var eml = $scope.user.email;
+        
+        if(eml){
+            console.log(eml.trim());
+            $scope.hash = md5(eml);
+            console.log($scope.hash)
+        }
+        else{
+          $scope.hash = "";
+        }
+
+    });
+
+
+    $scope.save = function(user){
+
+    };
+
+  }]);
+
+
 mod.controller('MasterCtrl', ['$scope', '$location', function($scope, $location) {
     
+    console.log('MasterCtrl');
     
     $scope.getClass = function(path) {
     if ($location.path().substr(0, path.length) == path) {
@@ -51,10 +86,8 @@ mod.controller('MasterCtrl', ['$scope', '$location', function($scope, $location)
   	];
 
   }])
-  .controller('AllProjectsCtrl', ['$scope','ngTableParams', '$http', function($scope, ngTableParams, $http) {
+  .controller('AllProjectsCtrl', ['$scope','ngTableParams', '$http', '$location', function($scope, ngTableParams, $http, $location) {
 
-
-   
 
     $scope.projectsTableParams = new ngTableParams({
         page: 1,            // show first page
