@@ -2,11 +2,24 @@ var express = require('express'),
 	morgan = require('morgan'),
 	mongoose = require('mongoose'),
 	app = express(),
+	bodyParser = require('body-parser'),
 	dbModel = require('./kbwDbModel.js'),
 	KanbanBoardItem = dbModel.KanbanBoardItem,
+	User = dbModel.User,
 	Project = dbModel.Project;
 
+
+
 app.use(morgan('dev')); 	
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded())
+
+// parse application/json
+app.use(bodyParser.json())
+
+// parse application/vnd.api+json as json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
+
 
 mongoose.connect('mongodb://localhost/test');
 var db = mongoose.connection;
@@ -26,6 +39,34 @@ app.route('/api/projects/')
 	});
 
 
+app.route('/api/users/')
+.post(function(req, res, next){
+	console.log('post users');
+	console.log(req.body);
+	var bd = req.body;
+
+	//if(bd.displayName && bd.email && bd.password && bd.dateOfBirth && bd.createdOn){
+		new User({displayName: bd.displayName, email: bd.email, password: bd.password, dateOfBirth: bd.dateOfBirth,
+			createdOn: new Date()
+		}).save(function(err, item){
+			if(err){
+				if(err.code == 11000)
+				{
+					return res.send(400, {errors: 
+						{"email": {"message": "This e-mail address is already registered"}
+					}});
+				}
+				console.log(err);
+				res.send(500, err);		
+			}
+			else{
+				res.location("/api/users/" + item._id);
+				res.send(200)
+				res.end();
+			}
+		});
+	//}
+});
 
 app.route('/api/items/')
 .get(function(req, res, next){
@@ -60,12 +101,6 @@ app.route('/api/items/:id')
 			res.json(data);
 		});
 	})
-	
-
-app.get('/api/users.json', function(req, res){
-  res.json([{name:'john', surname: 'doe', age: 65}]);
-});
-
 
 var server = app.listen(3000, function() { 
 	console.log('Listening on port %d', server.address().port);

@@ -22,10 +22,12 @@ mod.controller('LoginCtrl', ['$scope', '$location', function($scope, $location) 
 }]);
 
 
-mod.controller('UserCtrl', ['$scope', '$location', function($scope, $location) {
+mod.controller('UserCtrl', ['$scope', '$location','$http', function($scope, $location, $http) {
     
     console.log('UserCtrl');
-    
+
+    $scope.title = "New user";    
+
     $scope.titles = ['Mr', 'Mrs', 'Ms', 'Miss'];
 
     $scope.user = {
@@ -48,8 +50,33 @@ mod.controller('UserCtrl', ['$scope', '$location', function($scope, $location) {
     });
 
 
-    $scope.save = function(user){
+    $scope.save = function(user, form){
+      console.log('save');
+      
+      if(user.password != user.password2){
+        form.password.$setValidity('password does not match', false);
+        form.password2.$setValidity('password does not match', false);
+        return;
+      }
 
+      $http.post('/api/users/', user)
+      .success(function(data, status, headers){
+            alert('ok')        
+      })
+      .error(function(data, status, headers){
+          var key;
+          if(data.errors){
+            for(key in data.errors)
+            {
+                console.log('key: ' + key)
+                var message = data.errors[key].message;
+                var element = form[key]; 
+                element.$error.backend = message;
+            }
+        }
+      });
+
+//      userForm.password1.$setValidity("test", false);
     };
 
   }]);
