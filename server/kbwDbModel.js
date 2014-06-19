@@ -29,6 +29,16 @@ var projectSchema = mongoose.Schema({
 	editors: [mongoose.Schema.Types.ObjectId]
 });
 
+
+projectSchema.pre('save', function (next) {
+  
+  if(this.isNew){
+  	this.createdOn = new Date();
+  }
+
+  next();
+});
+
 exports.Project = mongoose.model('Project', projectSchema);
 
 
