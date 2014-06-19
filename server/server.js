@@ -27,17 +27,41 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 
-db.once('open', function callback () { console.log('Connection open'); });
+db.once('open', function callback () { 
+	console.log('Connection open'); 
+});
 app.use('/', express.static(__dirname  + '/../app'));
 
 
 app.route('/api/projects/')
 .get(function(req, res, next){
-	Project.find({}, function(err, data){
-			res.json(data);
+	var page = req.query.pageNo,
+		pageSize = req.query.pageSize,
+		sort = req.query.sortBy,
+		skip = page * pageSize;
+
+	var options = {};
+
+	if(!isNaN(pageSize) && !isNaN(skip)) {
+		options = { skip: skip, limit: pageSize };
+	}else{
+		options = { skip: 0, limit: 100};
+	}
+
+	Project.count({}, function(errCount, count){
+		Project.find({}, {}, options, function(err, data){
+			var result = {
+				page: page,
+				total: count,
+				data: data
+			};
+
+			res.json(result);
+			res.end();
 		});
 	});
-
+});
+	
 
 app.route('/api/users/')
 .post(function(req, res, next){
