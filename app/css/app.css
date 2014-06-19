@@ -114,3 +114,9 @@ div[data-state='Completed']{
 .table tbody tr:hover td, .table tbody tr:hover th {
     background-color:rgba(0,136, 204,0.08);
 }
+
+.top-shadow {
+    -webkit-box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
+}

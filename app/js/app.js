@@ -23,3 +23,15 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/allProjects', {templateUrl: 'partials/allProjects.html', controller: 'AllProjectsCtrl'});
   $routeProvider.otherwise({redirectTo: '/intro'});
 }]);
+
+
+$(document).ready(function(){
+ $(window).scroll(function(){
+  var y = $(window).scrollTop();
+  if( y > 0 ){
+      $(".navbar").addClass("top-shadow");
+  } else {
+      $(".navbar").removeClass("top-shadow");
+  }
+ });
+})
