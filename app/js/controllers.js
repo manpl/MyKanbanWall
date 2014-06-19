@@ -125,7 +125,10 @@ mod.controller('MasterCtrl', ['$scope', '$location', function($scope, $location)
     }, {
       total: 100,
         getData: function($defer, params) {
-            $http.get('/api/projects/').success(function(data){
+            debugger;
+            var page = params.page() - 1,
+                size = params.count();
+            $http.get('/api/projects/?pageNo='+page+'&pageSize=' + size).success(function(data){
                 params.total(data.total);
                 data = data.data;//.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 $defer.resolve(data);
