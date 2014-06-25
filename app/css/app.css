@@ -120,3 +120,36 @@ div[data-state='Completed']{
     -moz-box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
 }
+
+.reveal-animation.ng-enter {
+ -webkit-transition: 2s linear all; /* Safari/Chrome */
+ transition: 2s linear all; /* All other modern browsers and IE10+ */
+  opacity: 0;
+ /* The animation preparation code */
+ position: absolute;
+ left: -1000px;
+}
+
+.reveal-animation.ng-leave {
+ -webkit-transition: 2s linear all; /* Safari/Chrome */
+ transition: 2s linear all; /* All other modern browsers and IE10+ */
+
+ /* The animation preparation code */
+ position: absolute;
+}
+
+/*
+ Keep in mind that you want to combine both CSS
+ classes together to avoid any CSS-specificity
+ conflicts
+*/
+.reveal-animation.ng-enter.ng-enter-active {
+ /* The animation code itself */
+ left: 0px;
+ opacity: 1;
+}
+
+.reveal-animation.ng-leave.ng-leave-active {
+ /* The animation code itself */
+ right: 1500px;
+}
