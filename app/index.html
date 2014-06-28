@@ -31,12 +31,11 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-
-    <div ng-view class="container theme-showcase reveal-animation" role="main" >
+<div id="outer" style="width:100%">  
+    <div id="inner" ng-view class="container slide" role="main" >
 
     </div>
-
-  <div>MyKanbanWall: v<span app-version></span></div>
+</div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>

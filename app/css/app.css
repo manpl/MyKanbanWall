@@ -121,35 +121,65 @@ div[data-state='Completed']{
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.5);
 }
 
-.reveal-animation.ng-enter {
- -webkit-transition: 2s linear all; /* Safari/Chrome */
- transition: 2s linear all; /* All other modern browsers and IE10+ */
-  opacity: 0;
- /* The animation preparation code */
- position: absolute;
- left: -1000px;
+
+#inner{
 }
 
-.reveal-animation.ng-leave {
- -webkit-transition: 2s linear all; /* Safari/Chrome */
- transition: 2s linear all; /* All other modern browsers and IE10+ */
-
- /* The animation preparation code */
- position: absolute;
+.slide{
+  top: 65px;
+  position: absolute;
+  left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
 }
 
-/*
- Keep in mind that you want to combine both CSS
- classes together to avoid any CSS-specificity
- conflicts
-*/
-.reveal-animation.ng-enter.ng-enter-active {
- /* The animation code itself */
- left: 0px;
- opacity: 1;
+.slide.ng-leave        {
+  -webkit-animation:slideOutLeft 0.5s both ease-in;
+  -moz-animation:slideOutLeft 0.5s both ease-in;
+  animation:slideOutLeft 0.5s both ease-in;   
+}
+.slide.ng-enter    {  
+  -webkit-animation:slideInRight 0.5s both ease-in;
+  -moz-animation:slideInRight 0.5s both ease-in;
+  animation:slideInRight 0.5s both ease-in;    
+}
+/* slide in from the right */
+@keyframes slideInRight {
+  from  { transform:translateX(100%); opacity: 0; }
+  to    { transform: translateX(0); opacity: 1;}
+}
+@-moz-keyframes slideInRight {
+  from  { -moz-transform:translateX(100%); opacity: 0; }
+  to    { -moz-transform: translateX(0); opacity: 1;}
+}
+@-webkit-keyframes slideInRight {
+  from  { -webkit-transform:translateX(100%);  opacity: 0;}
+  to    { -webkit-transform: translateX(0); opacity: 1;}
 }
 
-.reveal-animation.ng-leave.ng-leave-active {
- /* The animation code itself */
- right: 1500px;
+/* slide in from the bottom */
+@keyframes slideOutLeft {
+  to    { transform: translateX(-100%); opacity: 0; }
+}
+@-moz-keyframes slideOutLeft {  
+  to    { -moz-transform: translateX(-100%); opacity: 0; }
+}
+@-webkit-keyframes slideOutLeft {
+  to    { -webkit-transform: translateX(-100%); opacity: 0;}
+}
+
+
+/* slide in from the bottom */
+@keyframes slideInUp {
+  from  { transform:translateY(100%); }
+  to    { transform: translateY(0); }
+}
+@-moz-keyframes slideInUp {
+  from  { -moz-transform:translateY(100%); }
+  to    { -moz-transform: translateY(0); }
+}
+@-webkit-keyframes slideInUp {
+  from  { -webkit-transform:translateY(100%); }
+  to    { -webkit-transform: translateY(0); }
 }
