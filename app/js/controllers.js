@@ -4,14 +4,24 @@
 
 var mod = angular.module('myApp.controllers', []);
 
-mod.controller('LoginCtrl', ['$scope', '$location', function($scope, $location) {
+mod.controller('LoginCtrl', ['$scope', '$location', '$http' , function($scope, $location, $http) {
 
     $scope.login = function()
     { 
-        $scope.isAuthenticated = true; 
-        $scope.user.username =''; 
-        $scope.user.password = '';
-        $scope.loginform.$setPristine();
+        console.log('login');         
+
+        $http.post('/login/', $scope.user)
+        .success(function(data, status, headers){
+            console.log('success')
+            if(status == 200){
+              $scope.isAuthenticated = true;
+              $scope.loginform.$setPristine();
+              $scope.user.displayName = data.displayName;
+            }
+        })
+        .error(function(data, status, headers){
+            console.log(status);
+        });  
     };
 
     $scope.logout = function(){ $scope.isAuthenticated = false;  };
@@ -94,23 +104,28 @@ mod.controller('MasterCtrl', ['$scope', '$location', function($scope, $location)
         }
     }
 
+    $scope.getViewClass = function(){
+
+      if($location.path().indexOf('/project') > -1){
+        return 'fullScreen';
+      }
+
+      return '';
+    }
+
   }])
   .controller('ProjectCtrl', ['$scope', function($scope) {
 
-  	$scope.Items = [
-  		{
-  			Caption: 'Item #1',
-  			Owner: 'nawrockim@op.pl',
-  			Content: 'Learn angularjs and write an application. i.e Kanban board',
-  			State: 'Proposed'
-  		},
-  		{
-  			Caption: 'Item #2',
-  			Owner: 'nawrockim@op.pl',
-  			Content: 'asdbsadadsadas',
-  			State: 'Completed'
-  		}
-  	];
+  	$scope.kbwItems = [{
+      Caption: 'a',
+      Owner: '',
+      Content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore'
+    },
+    {
+      Caption: 'b',
+      Owner: '',
+      Content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam'
+    }];
 
   }])
   .controller('AllProjectsCtrl', ['$scope','ngTableParams', '$http', '$location', function($scope, ngTableParams, $http, $location) {
@@ -125,15 +140,25 @@ mod.controller('MasterCtrl', ['$scope', '$location', function($scope, $location)
     }, {
       total: 100,
         getData: function($defer, params) {
-            debugger;
             var page = params.page() - 1,
-                size = params.count();
-            $http.get('/api/projects/?pageNo='+page+'&pageSize=' + size).success(function(data){
+                size = params.count(),
+                url = '/api/projects/?pageNo='+page+'&pageSize=' + size,
+                filter = params.filter(),
+                filterKeys = Object.keys(filter);
+
+                if(filterKeys.length){
+                  url += '&filter=' + angular.toJson(filter);     
+                }
+
+            console.log(url);
+
+            $http.get(url).success(function(data){
                 params.total(data.total);
                 data = data.data;//.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 $defer.resolve(data);
             }).error(
-              function(){
+              function(a,b,c){
+                console.log(a,b,c)
                 alert('error')
               }
             );

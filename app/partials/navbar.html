@@ -22,9 +22,12 @@
           </div>
           <button ng-disabled="loginform.$invalid" class="btn btn-success" ng-click="login()">Login</button>
         </form>
+         <ul class="nav navbar-nav">
+         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li ng-show="!isAuthenticated" ><a href="#/registerUser">Register</a></li>
           <li ng-show="isAuthenticated"><a href="#" ng-click="logout()">Logout</a></li>
+          <li ng-show="isAuthenticated"><a href="#/editUser" title="click to edit">Logged in as {{user.displayName}}</a></li>
         </ul>
         </div><!--/.nav-collapse -->
       </div>

@@ -28,12 +28,22 @@ angular.module('myApp.directives', ['ngTable']).
       restrict: 'E',
       templateUrl: 'partials\\kanbanlane.html',
       replace: true,
-      transclude: true,
-      scope:{itemstate: '@itemstate'},
+      scope: {
+        items: '=',
+        itemstate: '@'
+      },
+      controller: function($scope) {
+        debugger;
+        $scope.visible = true;
+        $scope.collapse = function(){
+           $scope.visible = !$scope.visible;
+        }
+      },
       link: function(scope, element, attrs){
-        
-       // element.draggable();
-
+            debugger;
+            console.log(element);
+            $(element).resizable({ handles: "e" });
+          
       }
     };
 

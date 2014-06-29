@@ -71,23 +71,13 @@ body{
    border-top: 4px solid;
     text-align: center;
     min-width: 30px;
-    display: block;
     background-color: rgba(218, 211, 218, 0.9);
     border-bottom: 2px solid rgba(200, 200, 200, 1);
 }
 
 .kbw-lane {
-    display: inline-block;
-    list-style-type: none;
-    height: 100%;
     min-height: 500px;
-    min-width: 200px;
-    padding: 0px;
-    border: 1px solid rgba(200, 200, 200, 1);;
-    margin: 0x;
-    width: 33%;
     background: rgba(255,255,255,0.4);
-    overflow: hidden;
 }
 
 
@@ -182,4 +172,42 @@ div[data-state='Completed']{
 @-webkit-keyframes slideInUp {
   from  { -webkit-transform:translateY(100%); }
   to    { -webkit-transform: translateY(0); }
+}
+
+#kanbanLanes{
+  display: table;
+  width: 100%;
+  position: relative;
+  top: -15px;
+}
+
+.kbw-section{
+  display: table-cell;
+border: 1px solid gray;
+}
+
+.kbw-lane-header button
+{
+  float: right;
+  opacity: 0.3;
+}
+
+.fullScreen
+{
+  margin: 0;
+  width: 100%;
+  padding: 0;
+}
+
+#projectCaption{
+  position: relative;
+  background-color: rgba(218, 211, 218, 0.9);
+  width: 100%;
+  top: -15px;
+  padding: 5px 0 5px 0;
+}
+
+#btnAddItem {
+  float: right;
+  margin-right: 10px;
 }

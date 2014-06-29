@@ -1,14 +1,10 @@
-<H3>Items</H3>
+<span>
+	<div id="projectCaption">Project name  <button id="btnAddItem" class="btn btn-xs btn-success">Add new task</button></div>
+	<div id="kanbanLanes">
 
-
-<kanbanlane itemstate="Proposed">
-	<kanbanitem ng-repeat="item in Items" item="item" />
-</kanbanlane>
-
-<kanbanlane itemstate="Doing">
-	<kanbanitem ng-repeat="item in Items" item="item" />
-</kanbanlane>
-
-<kanbanlane itemstate="Completed">
-	<kanbanitem ng-repeat="item in Items" item="item" />
-</kanbanlane>
+			<kanbanlane itemstate="Proposed" items="kbwItems" ></kanbanlane>
+			<kanbanlane itemstate="Doing" items="kbwItems"  ></kanbanlane>
+			<kanbanlane itemstate="Testing" items="kbwItems"  ></kanbanlane>
+			<kanbanlane itemstate="Completed" items="kbwItems"  ></kanbanlane>
+	</div>
+</span>

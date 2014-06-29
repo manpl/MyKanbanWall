@@ -1,0 +1,16 @@
+{
+
+  author : 'joe',
+  title : 'Too big to fail',
+  text : '123',
+  tags : [ 'business', 'finance' ],
+  when : ISODate("2008-11-03"),
+  views : 23002,
+  votes : 4,
+  voters : ['joe', 'jane', 'bob', 'somesh'],
+  comments : [ { commenter : 'allan', comment : 'Well, i dont think so ', flagged:false, plus:2 }   ]
+}
+
+db.postings.update( { }, { $inc : {votes:1}, $push : {voters:'joe'} } );
+
+db.movies.update( { voters:{$ne:'joe'} }, { $inc : {votes:1}, $push : {voters:'joe'} } );

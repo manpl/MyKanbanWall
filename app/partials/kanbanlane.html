@@ -1,7 +1,13 @@
 
-<div class="kbw-lane">
-    <div class="kbw-lane-header" data-state="{{itemstate}}" >
-    	<span>{{itemstate}}</span>
-    </div>
-    <span ng-transclude="true"/>
+<div class="kbw-section">
+	<div class="kbw-lane">
+	    <div class="kbw-lane-header" data-state="{{itemstate}}" >
+	    	<span>{{itemstate}}</span><button title="collapse" class="glyphicon glyphicon-resize-horizontal" ng-click="collapse()"></button>
+	    </div>
+	    <kanbanitem ng-show="visible" ng-repeat="item in items" item="item"></kanbanitem>
+	</div>
 </div>
+
+
+
+

@@ -56,7 +56,7 @@ userSchema.pre('save', function (next) {
   this.updatedOn = new Date();
   this.email = this.email.toLowerCase();
 
-  if(!this.isModified('password'))
+  if(this.isModified('password'))
   	this.password = md5(this.password);
   
   next();
